@@ -35,21 +35,31 @@ public class SSUserDetailService implements UserDetailsService
 				return null;
 			}
 
+			System.out.println("A user has been found:"+user.getUsername());
+			System.out.println("user login detail"+user.getPassword());
+			System.out.println("user login detail"+getAuthorities(user));
 			return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),getAuthorities(user));
 
 		}catch (Exception e)
+
 		{
+
 			throw new UsernameNotFoundException("User not found");
 		}
+
 	}
 
+
 	private Set<GrantedAuthority> getAuthorities(User user) {
+		System.out.println("Entered getAuthorities");
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		System.out.println(user.getRoles());
 		for(Role eachRole:user.getRoles())
 		{
+			System.out.println("user permission");
 			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(eachRole.getRole());
 			authorities.add(grantedAuthority);
-			//System.out.println("Granted Authority"+grantedAuthority.toString());
+			System.out.println("Granted Authority"+eachRole.getRole());
 		}
 		return authorities;
 	}

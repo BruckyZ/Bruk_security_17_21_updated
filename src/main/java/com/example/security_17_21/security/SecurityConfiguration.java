@@ -32,14 +32,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		http.authorizeRequests()
 				.antMatchers("/","/h2-console/**").permitAll()
-				//.antMatchers("/admin").access("hasAuthority('ADMIN')")
 				.anyRequest().authenticated()
+				.antMatchers("/secure").access("hasAuthority('ADMIN')")
 				.and()
-				.formLogin().loginPage("/login").permitAll()
+				.formLogin().loginPage("/login").defaultSuccessUrl("/",true).permitAll()
 				.and()
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login").permitAll().permitAll()
+				.logoutSuccessUrl("/login").permitAll()
 				.and()
 				.httpBasic();
 		http.csrf().disable();
