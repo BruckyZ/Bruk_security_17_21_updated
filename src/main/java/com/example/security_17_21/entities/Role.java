@@ -13,7 +13,7 @@ public class Role
 	@Column(unique=true)
 	private String role;
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
 	private Set<User> users;
 
 	public long getId()

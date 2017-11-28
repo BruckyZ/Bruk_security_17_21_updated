@@ -12,20 +12,23 @@ public class HomeController
 	{
 		return "index";
 	}
+
 	@RequestMapping("/login")
 	public String login()
 	{
 		return "login";
 	}
-//	@RequestMapping("/admin")
-//	public String admin()
-//	{
-//		return "admin";
-//	}
+
 	@RequestMapping("/secure")
 	public String secure()
 	{
 		return "secure";
+	}
+
+	@RequestMapping("/granted")
+	public String granted()
+	{
+		return "viewuser";
 	}
 
 }

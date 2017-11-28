@@ -2,6 +2,7 @@ package com.example.security_17_21.entities;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,9 +31,12 @@ public class User
 	@Column(name="username")
 	private String username;
 
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
+	public User() {
+		this.roles=new HashSet<>();
+	}
 
 	public long getId()
 	{
@@ -112,5 +116,10 @@ public class User
 	public void setRoles(Set<Role> roles)
 	{
 		this.roles = roles;
+	}
+
+	public void addRole(Role role)
+	{
+		this.roles.add(role);
 	}
 }
